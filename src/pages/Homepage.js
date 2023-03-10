@@ -13,32 +13,15 @@ function Homepage() {
         })
     })
 
+    const posts = JSON.parse(localStorage.getItem("posts"))
+
     return (
         <div className="Home">
-            <PostCard post={
-                {
-                    postHeader: "Something",
-                    postBody: "Somebody",
-                }
-            }/>
-            <PostCard post={
-                {
-                    postHeader: "Not Something",
-                    postBody: "Not Somebody",
-                }
-            }/>
-            <PostCard post={
-                {
-                    postHeader: "Not Something",
-                    postBody: "Not Somebody",
-                }
-            }/>
-            <PostCard post={
-                {
-                    postHeader: "Not Something",
-                    postBody: "Not Somebody",
-                }
-            }/>
+            {
+                posts.map((post)=>{
+                    return <PostCard post={post}/>
+                })
+            }
         </div>
     );
 }

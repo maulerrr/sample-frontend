@@ -3,7 +3,6 @@ import React from "react";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Personalpage from "./pages/Personalpage";
 import Homepage from "./pages/Homepage";
-import LoginForm from "./components/LoginForm";
 import Loginpage from "./pages/Loginpage";
 import SignUpPage from "./pages/SignUpPage";
 import {CookiesProvider} from "react-cookie";

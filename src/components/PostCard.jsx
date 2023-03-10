@@ -7,10 +7,10 @@ function PostCard(props) {
     return (
         <div className={classes.PostContainer}>
             <h1 className={classes.PostHeader}>
-                {props.post.postHeader}
+                {props.post.header}
             </h1>
             <p className={classes.PostBody}>
-                {props.post.postBody}
+                {props.post.body}
             </p>
 
             <button

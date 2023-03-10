@@ -1,4 +1,5 @@
 .PostContainer{
+    max-width: 25% ;
     padding: 1.5rem;
     border-radius: 1rem;
     color: #282c34;

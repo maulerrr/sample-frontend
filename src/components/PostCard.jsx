@@ -1,9 +1,36 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import classes from "./classes/components.module.css"
 import Like from "../handlers/implement/HandleLike";
-import DeletePost from "../handlers/implement/HandleDelete";
+import DeletePost from "../handlers/HandleDelete";
+import GetPosts from "../handlers/HandleGetPosts";
 
 function PostCard(props) {
+
+    function HandleLike(e){
+        e.preventDefault()
+
+        Like(props.post.post_id).then((response)=> {
+            console.log("Liked post with ID="+props.post.post_id)
+            })
+    }
+
+    function HandleDelete(e) {
+        e.preventDefault()
+        DeletePost(props.post.post_id).then(()=>{
+            GetPosts()
+                .then((response)=>response.data)
+                .then(()=> {
+                    console.log("Updated posts after delete..")
+                })
+            console.log("Deleted post with id=" + props.post.post_id)
+        })
+    }
+
+    useEffect(()=>{
+        GetPosts()
+            .then((response)=>response.data)
+    }, [props])
+
     return (
         <div className={classes.PostContainer}>
             <h1 className={classes.PostHeader}>
@@ -15,10 +42,10 @@ function PostCard(props) {
 
             <button
                 className={classes.LikeButton}
-                onClick={Like}>Like</button>
+                onClick={HandleLike}>Like</button>
             <button
                 className={classes.DeleteButton}
-                onClick={DeletePost}>Delete</button>
+                onClick={HandleDelete}>Delete</button>
         </div>
     );
 }

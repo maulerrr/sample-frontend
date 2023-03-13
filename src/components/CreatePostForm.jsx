@@ -6,14 +6,23 @@ import handleGetPosts from "../handlers/HandleGetPosts";
 function CreatePostForm(...props) {
     const [header, setHeader] = useState("")
     const [body, setBody] = useState("")
+    const [error, setError] = useState(false)
 
     function HandleCreatePost(e){
         e.preventDefault()
-        handleCreatePost(header, body).then(()=>{
-            handleGetPosts().then(r => {
-                console.log("Updated posts!")
+        handleCreatePost(header, body)
+            .then(()=>{
+                handleGetPosts()
+                    .then(response => response.data)
+                    .then(() => console.log("Updated posts!"))
+                    .catch(() => setError(true))
             })
-        })
+        setHeader("")
+        setBody("")
+    }
+
+    if (error) {
+        return <p>Error fetching posts</p>;
     }
 
     return (

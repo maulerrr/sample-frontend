@@ -3,6 +3,14 @@ import LogOut from "../handlers/implement/HandleLogOut";
 import classes from "./classes/components.module.css"
 
 function Navbar(props) {
+
+    function handleLogOut(e){
+        e.preventDefault()
+        LogOut().then(()=>{
+            console.log("see ya")
+        })
+    }
+
     return (
         <header>
             <nav className={classes.Navbar}>
@@ -14,7 +22,7 @@ function Navbar(props) {
 
                 <a href="/personal">Personal</a>
 
-                <button onClick={LogOut}>
+                <button onClick={handleLogOut}>
                     Log out
                 </button>
             </nav>

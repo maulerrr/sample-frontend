@@ -10,7 +10,7 @@ async function GetLike(post_id){
     if (!user) return
 
     const options = {
-        url: "http://10.12.96.144:3001/api/v1/post/like/" + user.id + "/" + post_id,
+        url: "https://sample-project-production.up.railway.app/api/v1/post/like/" + user.id + "/" + post_id,
         config: {
             headers: {
                 "Content-Type": "application/json",

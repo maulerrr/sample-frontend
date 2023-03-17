@@ -3,7 +3,7 @@ import {useCookies} from "react-cookie";
 
 async function Login(email, password){
     const options = {
-        url: "http://10.12.96.144:3001/api/v1/auth/login",
+        url: "https://sample-project-production.up.railway.app/api/v1/auth/login",
         headers: "",
         body: {
             email: email,

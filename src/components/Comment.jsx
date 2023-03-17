@@ -2,9 +2,17 @@ import React, {useState} from 'react';
 import classes from "./classes/components.module.css"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrashCan} from "@fortawesome/free-solid-svg-icons"
-import DeleteComment from "../handlers/implement/HandleDeleteComment";
+import DeleteComment from "../handlers/comments/HandleDeleteComment";
+import {Alert, AlertTitle} from "@mui/material";
 
 function Comment(props) {
+    const [alert, setAlert] = useState(<></>)
+
+    function closeAlert(e){
+        e.preventDefault()
+        setAlert(<></>)
+    }
+
     function HandleCommentDeletion(e){
         e.preventDefault()
 
@@ -12,13 +20,22 @@ function Comment(props) {
 
         DeleteComment(comment_id)
             .then((response)=> {
+                props.onCommentDelete(comment_id);
                 console.log(response)
             })
             .catch((error)=> {
-                console.log(error)
-            })
-            .finally(()=> {
-                window.location.reload()
+                setAlert(
+                    <Alert severity={"error"}
+                           variant={"filled"}
+                           onClose={(e)=>{closeAlert(e)}}
+                    >
+                        <AlertTitle>Error occurred</AlertTitle>
+                        {error.response.data.message}
+                    </Alert>
+                )
+                setTimeout(()=>{
+                    setAlert(<></>)
+                }, 3000)
             })
     }
 
@@ -35,6 +52,10 @@ function Comment(props) {
                     <FontAwesomeIcon icon={faTrashCan}/>
                 </button>
             </p>
+
+            <div className={classes.Alerts}>
+                {alert}
+            </div>
         </div>
     );
 }

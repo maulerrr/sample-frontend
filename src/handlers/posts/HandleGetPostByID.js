@@ -6,7 +6,7 @@ async function HandleGetPostByID(post_id){
     if (!token) return
 
     const options = {
-        url: "http://10.12.96.140:3001/api/v1/post/" + post_id,
+        url: "http://10.12.96.144:3001/api/v1/post/" + post_id,
         config: {
             headers: {
                 'Content-Type': "application/json",

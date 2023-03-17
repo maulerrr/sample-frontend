@@ -1,11 +1,20 @@
 import React from 'react';
 import classes from "./classes/components.module.css"
-import handleLogin from "../handlers/HandleLogin";
+import handleLogin from "../handlers/auth/HandleLogin";
 import {useState} from "react";
+import {Alert, AlertTitle, Button, Fade} from "@mui/material";
+
 
 function LoginForm(props) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [error, setError] = useState(false)
+    const [alert, setAlert] = useState(<></>)
+
+    function closeAlert(e){
+        e.preventDefault()
+        setAlert(<></>)
+    }
 
     function HandleLogin(e){
         e.preventDefault()
@@ -15,9 +24,21 @@ function LoginForm(props) {
                 if (response.code === 200) window.location.href = "/"
             })
             .catch((err)=>{
-                console.log(err)
+                setError(true)
+                setAlert(
+                    <Alert severity={"error"}
+                           variant={"filled"}
+                           onClose={(e)=>{closeAlert(e)}}
+                           >
+                        <AlertTitle>Error occurred</AlertTitle>
+                        {err.response.data.message}
+                    </Alert>
+                )
+                setTimeout(()=>{
+                    setAlert(<></>)
+                }, 3000)
             })
-        }
+    }
 
     return (
         <div className={classes.FormWrapper}>
@@ -35,6 +56,11 @@ function LoginForm(props) {
 
                 <input type="submit" value="Login"/>
             </form>
+
+            <div className={classes.Alerts}>
+                {alert}
+            </div>
+
         </div>
     );
 }

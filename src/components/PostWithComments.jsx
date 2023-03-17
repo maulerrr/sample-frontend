@@ -3,19 +3,44 @@ import classes from "./classes/components.module.css";
 import Comment from "./Comment";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faHeart, faTrash} from "@fortawesome/free-solid-svg-icons";
-import Like from "../handlers/HandleLike";
-import DeletePost from "../handlers/HandleDelete";
-import GetPosts from "../handlers/HandleGetPosts";
-import DeleteComment from "../handlers/implement/HandleDeleteComment";
-import CreateComment from "../handlers/HandleComment";
-import GetLike from "../handlers/implement/HandleGetLike";
+import Like from "../handlers/likes/HandleLike";
+import DeletePost from "../handlers/posts/HandleDelete";
+import GetPosts from "../handlers/posts/HandleGetPosts";
+import DeleteComment from "../handlers/comments/HandleDeleteComment";
+import CreateComment from "../handlers/comments/HandleComment";
+import GetLike from "../handlers/likes/HandleGetLike";
+import {Alert, AlertTitle} from "@mui/material";
 
 function PostWithComments(props) {
-    const [text, setText] = useState()
+    const [text, setText] = useState("")
     const [color, setColor] = useState("black")
+    const [alert, setAlert] = useState(<></>)
+
+    function closeAlert(e){
+        e.preventDefault()
+        setAlert(<></>)
+    }
 
     function HandleCommentCreation(e){
         e.preventDefault()
+
+        let validText = text.replace(/\s/g, '')
+
+        if (validText === ""){
+            setAlert(
+                <Alert severity={"error"}
+                       variant={"filled"}
+                       onClose={(e)=>{closeAlert(e)}}
+                >
+                    <AlertTitle>Error occurred</AlertTitle>
+                    You cannot create empty comment!
+                </Alert>
+            )
+            setTimeout(()=>{
+                setAlert(<></>)
+            }, 3000)
+            return
+        }
 
         CreateComment(props.post.post_id, text)
             .then((response) => {
@@ -94,10 +119,14 @@ function PostWithComments(props) {
                 </form>
                 <div>
                     {props.comments && props.comments.map((comment)=>
-                        <Comment comment={comment} key={comment.comment_id}/>
+                        <Comment comment={comment} key={comment.comment_id} onCommentDelete={props.onCommentDelete}/>
                     )}
                 </div>
             </section>
+
+            <div className={classes.Alerts}>
+                {alert}
+            </div>
         </div>
     );
 }

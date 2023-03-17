@@ -4,7 +4,7 @@ async function GetPosts() {
     const token = "Bearer " + localStorage.getItem("token");
 
     const options = {
-        url: "http://10.12.96.140:3001/api/v1/post/",
+        url: "http://10.12.96.144:3001/api/v1/post/",
         config: {
             headers: {
                 'Content-Type': "application/json",

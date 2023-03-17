@@ -1,14 +1,24 @@
 import React, {useEffect, useState} from 'react';
 import classes from "./classes/components.module.css"
-import Like from "../handlers/HandleLike";
-import DeletePost from "../handlers/HandleDelete";
-import GetPosts from "../handlers/HandleGetPosts";
+import Like from "../handlers/likes/HandleLike";
+import DeletePost from "../handlers/posts/HandleDelete";
+import GetPosts from "../handlers/posts/HandleGetPosts";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrash, faHeart} from "@fortawesome/free-solid-svg-icons"
-import GetLike from "../handlers/implement/HandleGetLike";
+import GetLike from "../handlers/likes/HandleGetLike";
+import GetLikesCount from "../handlers/likes/HandleCountLikes";
+import {Alert, AlertTitle} from "@mui/material";
 
 function PostCard(props) {
     const [color, setColor] = useState("black")
+    const [alert, setAlert] = useState(<></>)
+    const [likesCount, setLikesCount] = useState(0)
+    const [likes, setLikes] = useState(<></>)
+
+    function closeAlert(e){
+        e.preventDefault()
+        setAlert(<></>)
+    }
 
     function HandleLike(e){
         e.preventDefault()
@@ -31,6 +41,19 @@ function PostCard(props) {
                     console.log("Updated posts after delete..")
                 })
             console.log("Deleted post with id=" + props.post.post_id)
+        }).catch((error)=> {
+            setAlert(
+                <Alert severity={"error"}
+                       variant={"filled"}
+                       onClose={(e)=>{closeAlert(e)}}
+                >
+                    <AlertTitle>Error occurred</AlertTitle>
+                    {error.response.data.message}
+                </Alert>
+            )
+            setTimeout(()=>{
+                setAlert(<></>)
+            }, 3000)
         })
     }
 
@@ -45,6 +68,7 @@ function PostCard(props) {
                 console.log("error on getting like data")
                 setColor("black")
             })
+
     }, [])
 
     return (
@@ -70,6 +94,10 @@ function PostCard(props) {
                 onClick={HandleDelete}>
                 <FontAwesomeIcon icon={faTrash}/>
             </button>
+
+            <div className={classes.Alerts}>
+                {alert}
+            </div>
         </div>
     );
 }

@@ -1,11 +1,12 @@
 import axios from "axios"
 import {useCookies} from "react-cookie";
 
-async function Login(email, password){
+async function SignUp(username, email, password){
     const options = {
-        url: "http://10.12.96.140:3001/api/v1/auth/login",
+        url: "http://10.12.96.144:3001/api/v1/auth/signup",
         headers: "",
         body: {
+            username: username,
             email: email,
             password: password
         }
@@ -20,9 +21,9 @@ async function Login(email, password){
     localStorage.setItem("token", response.data.token)
 
     const user = {
-        id : response?.data.user_id,
-        username : response?.data.username,
-        email : response?.data.email,
+        id : response.data?.user_id,
+        username : response.data?.username,
+        email : response.data?.email,
     }
 
     localStorage.setItem("user", JSON.stringify(user))
@@ -30,4 +31,4 @@ async function Login(email, password){
     return response
 }
 
-export default Login;
+export default SignUp;

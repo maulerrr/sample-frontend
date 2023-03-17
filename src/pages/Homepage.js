@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import PostCard from "../components/PostCard";
-import handleGetPosts from "../handlers/HandleGetPosts";
-import DeletePost from "../handlers/HandleDelete";
+import handleGetPosts from "../handlers/posts/HandleGetPosts";
+import DeletePost from "../handlers/posts/HandleDelete";
 
 function Homepage() {
     const [posts, setPosts] = useState(null);

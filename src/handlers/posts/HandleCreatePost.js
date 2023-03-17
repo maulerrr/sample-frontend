@@ -1,16 +1,19 @@
 import axios from "axios";
+import {useCookies} from "react-cookie";
 
-async function CreateComment(post_id, text) {
+async function CreatePost(header, body) {
     const token = "Bearer " + localStorage.getItem("token")
 
     if (!token) return
 
     const user = JSON.parse(localStorage.getItem("user"))
 
+    console.log(user.user_id)
+
     if (!user) return
 
     const options = {
-        url: "http://10.12.96.140:3001/api/v1/comment/",
+        url: "http://10.12.96.144:3001/api/v1/post/",
         config: {
             headers: {
                 "Content-Type": "application/json",
@@ -19,16 +22,17 @@ async function CreateComment(post_id, text) {
         },
         body: {
             user_id: user.id,
-            post_id: post_id,
-            text: text,
+            header: header,
+            body: body
         }
     }
 
-    return (await axios.post(
+    const response = (await axios.post(
         options.url,
         options.body,
         options.config
     )).data
+
 }
 
-export default CreateComment;
+export default CreatePost;

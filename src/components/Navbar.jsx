@@ -1,5 +1,5 @@
 import React from 'react';
-import LogOut from "../handlers/HandleLogOut";
+import LogOut from "../handlers/auth/HandleLogOut";
 import classes from "./classes/components.module.css"
 
 function Navbar(props) {

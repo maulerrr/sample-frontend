@@ -3,7 +3,7 @@ import {useCookies} from "react-cookie";
 
 async function SignUp(username, email, password){
     const options = {
-        url: "http://localhost:3001/api/v1/auth/signup",
+        url: "http://10.12.96.140:3001/api/v1/auth/signup",
         headers: "",
         body: {
             username: username,
@@ -28,6 +28,7 @@ async function SignUp(username, email, password){
 
     localStorage.setItem("user", JSON.stringify(user))
 
+    return response
 }
 
 export default SignUp;

@@ -3,16 +3,21 @@ import classes from "./classes/components.module.css"
 import handleLogin from "../handlers/HandleLogin";
 import {useState} from "react";
 
-function LoginForm(...props) {
+function LoginForm(props) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
     function HandleLogin(e){
         e.preventDefault()
-        handleLogin(email, password).then(()=>{
-            console.log("Trying to log in..")
-        })
-    }
+        handleLogin(email, password)
+            .then((response)=>{
+                console.log("Trying to log in..")
+                if (response.code === 200) window.location.href = "/"
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
+        }
 
     return (
         <div className={classes.FormWrapper}>

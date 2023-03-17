@@ -2,16 +2,21 @@ import React, {useState} from 'react';
 import classes from "./classes/components.module.css"
 import handleRegistration from "../handlers/HandleRegistration";
 
-function SignupForm(...props) {
+function SignupForm(props) {
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
     function HandleRegistration(e){
         e.preventDefault()
-        handleRegistration(username, email, password).then(()=>{
-            console.log("Trying to u sign up..")
-        })
+        handleRegistration(username, email, password)
+            .then((response)=>{
+                console.log("Trying to u sign up..")
+                if (response.code === 200) window.location.href = "/"
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
     }
 
     return (

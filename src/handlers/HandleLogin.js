@@ -3,7 +3,7 @@ import {useCookies} from "react-cookie";
 
 async function Login(email, password){
     const options = {
-        url: "http://localhost:3001/api/v1/auth/login",
+        url: "http://10.12.96.140:3001/api/v1/auth/login",
         headers: "",
         body: {
             email: email,
@@ -27,6 +27,7 @@ async function Login(email, password){
 
     localStorage.setItem("user", JSON.stringify(user))
 
+    return response
 }
 
 export default Login;

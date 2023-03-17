@@ -9,8 +9,9 @@
   margin: 0 3rem;
 
   display: flex;
-  justify-content: space-evenly;
+  gap: 1rem;
   flex-wrap: wrap;
+  justify-content: center;
 }
 .Login {
   min-height: 60vh;
@@ -29,12 +30,16 @@
   align-items: center;
 }
 
-.Personal {
+.CreatePostPage {
   min-height: 60vh;
   margin: 0 3rem;
 
   display: flex;
   flex-direction: column;
+}
+
+.PostPage {
+  padding: 0 10rem;
 }
 input{
   outline: none;
@@ -48,4 +53,8 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
+}
+
+textarea {
+  resize: none;
 }

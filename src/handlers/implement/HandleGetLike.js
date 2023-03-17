@@ -1,7 +1,6 @@
 import axios from "axios";
-import {useCookies} from "react-cookie";
 
-async function DeletePost(postID) {
+async function GetLike(post_id){
     const token = "Bearer " + localStorage.getItem("token")
 
     if (!token) return
@@ -11,20 +10,16 @@ async function DeletePost(postID) {
     if (!user) return
 
     const options = {
-        url: "http://10.12.96.140:3001/api/v1/post/" + user.id + "/" + postID,
+        url: "http://10.12.96.140:3001/api/v1/post/like/" + user.id + "/" + post_id,
         config: {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": token
             }
-        },
+        }
     }
 
-    const response = (await axios.delete(
-        options.url,
-        options.config,
-    )).data
-
+    return (await axios.get(options.url, options.config)).data
 }
 
-export default DeletePost;
+export default GetLike;

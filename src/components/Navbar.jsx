@@ -1,5 +1,5 @@
 import React from 'react';
-import LogOut from "../handlers/implement/HandleLogOut";
+import LogOut from "../handlers/HandleLogOut";
 import classes from "./classes/components.module.css"
 
 function Navbar(props) {
@@ -8,6 +8,8 @@ function Navbar(props) {
         e.preventDefault()
         LogOut().then(()=>{
             console.log("see ya")
+        }).finally(()=>{
+            window.location.href='/'
         })
     }
 
@@ -20,7 +22,7 @@ function Navbar(props) {
 
                 <a href="/">Home</a>
 
-                <a href="/personal">Personal</a>
+                <a href="/create">Create</a>
 
                 <button onClick={handleLogOut}>
                     Log out

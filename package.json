@@ -2,7 +2,7 @@
   "name": "sample-frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://sample-project-production.up.railway.app/",
+  "proxy": "http://localhost:3001/",
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",

@@ -10,7 +10,7 @@ async function CreateComment(post_id, text) {
     if (!user) return
 
     const options = {
-        url: "https://sample-project-production.up.railway.app/api/v1/comment/",
+        url: "https://http://localhost:3001/api/v1/comment/",
         config: {
             headers: {
                 "Content-Type": "application/json",

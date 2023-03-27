@@ -13,7 +13,7 @@ async function CreatePost(header, body) {
     if (!user) return
 
     const options = {
-        url: "https://sample-project-production.up.railway.app/api/v1/post/",
+        url: "https://http://localhost:3001/api/v1/post/create",
         config: {
             headers: {
                 "Content-Type": "application/json",

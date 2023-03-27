@@ -4,7 +4,7 @@ async function GetComments(post_id) {
     const token = "Bearer " + localStorage.getItem("token");
 
     const options = {
-        url: "https://sample-project-production.up.railway.app/api/v1/comment/" + post_id,
+        url: "https://http://localhost:3001/api/v1/comment/all?post_id=" + post_id,
         config: {
             headers: {
                 'Content-Type': "application/json",

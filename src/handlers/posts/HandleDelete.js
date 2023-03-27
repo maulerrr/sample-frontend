@@ -11,7 +11,7 @@ async function DeletePost(postID) {
     if (!user) return
 
     const options = {
-        url: "https://sample-project-production.up.railway.app/api/v1/post/" + user.id + "/" + postID,
+        url: "https://http://localhost:3001/api/v1/post/" + user.id + "/" + postID, // TODO
         config: {
             headers: {
                 "Content-Type": "application/json",

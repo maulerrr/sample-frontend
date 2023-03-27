@@ -10,7 +10,7 @@ async function DeleteComment(comment_id){
     if (!user) return
 
     const options = {
-        url: "https://sample-project-production.up.railway.app/api/v1/comment/" + user.id + "/" + comment_id,
+        url: "https://http://localhost:3001/api/v1/comment/delete?id=" + comment_id,
         config: {
             headers: {
                 "Content-Type": "application/json",

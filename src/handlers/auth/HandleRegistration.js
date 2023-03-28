@@ -3,7 +3,7 @@ import {useCookies} from "react-cookie";
 
 async function SignUp(username, email, password){
     const options = {
-        url: "https://http://localhost:3001/api/v1/auth/signup",
+        url: "http://localhost:3001/api/v1/auth/signup",
         headers: "",
         body: {
             username: username,
@@ -19,6 +19,8 @@ async function SignUp(username, email, password){
     )).data
 
     localStorage.setItem("token", response.data.token)
+
+    console.log(response)
 
     const user = {
         id : response.data?.user_id,

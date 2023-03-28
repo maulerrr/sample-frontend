@@ -10,7 +10,7 @@ async function CreateComment(post_id, text) {
     if (!user) return
 
     const options = {
-        url: "https://http://localhost:3001/api/v1/comment/",
+        url: "http://localhost:3001/api/v1/comment/",
         config: {
             headers: {
                 "Content-Type": "application/json",

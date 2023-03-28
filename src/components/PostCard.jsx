@@ -42,13 +42,16 @@ function PostCard(props) {
                 })
             console.log("Deleted post with id=" + props.post.post_id)
         }).catch((error)=> {
+            console.log(error)
             setAlert(
                 <Alert severity={"error"}
                        variant={"filled"}
                        onClose={(e)=>{closeAlert(e)}}
                 >
                     <AlertTitle>Error occurred</AlertTitle>
-                    {error.response.data.message}
+                    {error.response?.data.message}
+                    {/*<br/>*/}
+                    {/*{error?.message}*/}
                 </Alert>
             )
             setTimeout(()=>{
@@ -64,7 +67,7 @@ function PostCard(props) {
                     setColor("red")
                 }
             })
-            .catch(()=>{
+            .catch((err)=>{
                 console.log("error on getting like data")
                 setColor("black")
             })

@@ -10,7 +10,7 @@ async function GetLike(post_id){
     if (!user) return
 
     const options = {
-        url: "https://http://localhost:3001/api/v1/post/like?user_id=" + user.id + "&post_id=" + post_id,
+        url: "http://localhost:3001/api/v1/post/like/get?user_id=" + user.id + "&post_id=" + post_id,
         config: {
             headers: {
                 "Content-Type": "application/json",

@@ -82,11 +82,15 @@ function PostWithComments(props) {
     useEffect(()=>{
         GetLike(props?.post.post_id)
             .then((response)=> {
+                console.log(response)
+
                 if (response.status === 200) {
                     setColor("red")
+                } else {
+                    setColor("black")
                 }
             })
-            .catch(()=>{
+            .catch((err)=>{
                 console.log("error on getting like data")
                 setColor("black")
             })

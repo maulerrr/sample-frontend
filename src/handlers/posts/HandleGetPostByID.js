@@ -6,7 +6,7 @@ async function HandleGetPostByID(post_id){
     if (!token) return
 
     const options = {
-        url: "https://http://localhost:3001/api/v1/post/get?id=" + post_id,
+        url: "http://localhost:3001/api/v1/post/get?id=" + post_id,
         config: {
             headers: {
                 'Content-Type': "application/json",

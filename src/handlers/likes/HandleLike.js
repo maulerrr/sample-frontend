@@ -7,7 +7,7 @@ async function Like(post_id){
     if (!token) return
 
     const options = {
-        url: "https://http://localhost:3001/api/v1/post/like",
+        url: "http://localhost:3001/api/v1/post/like",
         config: {
             headers: {
                 "Content-Type": "application/json",

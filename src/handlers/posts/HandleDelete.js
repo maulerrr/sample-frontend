@@ -11,7 +11,7 @@ async function DeletePost(postID) {
     if (!user) return
 
     const options = {
-        url: "http://10.12.96.85:3001/api/v1/post/delete?id=" + postID,
+        url: "https://sample-ginless-production.up.railway.app/api/v1/post/delete?id=" + postID,
         config: {
             headers: {
                 "Content-Type": "application/json",

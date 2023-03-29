@@ -4,7 +4,7 @@ async function GetPosts() {
     const token = "Bearer " + localStorage.getItem("token");
 
     const options = {
-        url: "http://10.12.96.85:3001/api/v1/post/",
+        url: "https://sample-ginless-production.up.railway.app/api/v1/post/",
         config: {
             headers: {
                 'Content-Type': "application/json",

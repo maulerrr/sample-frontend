@@ -8,6 +8,8 @@ import {Alert, AlertTitle} from "@mui/material";
 function Comment(props) {
     const [alert, setAlert] = useState(<></>)
 
+    const user_id = JSON.parse(localStorage.getItem("user"))?.id
+
     function closeAlert(e){
         e.preventDefault()
         setAlert(<></>)
@@ -47,10 +49,13 @@ function Comment(props) {
                     {props.comment.text}
                 </pre>
 
-                <button className={classes.DeleteComment}
-                        onClick={HandleCommentDeletion}>
-                    <FontAwesomeIcon icon={faTrashCan}/>
-                </button>
+                {
+                    props.comment.user_id === user_id ?
+                    <button className={classes.DeleteComment}
+                         onClick={HandleCommentDeletion}>
+                        <FontAwesomeIcon icon={faTrashCan} color={"white"}/>
+                    </button> : <></>
+                }
             </p>
 
             <div className={classes.Alerts}>

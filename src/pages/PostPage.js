@@ -4,6 +4,7 @@ import HandleGetComments from "../handlers/comments/HandleGetComments";
 import {useParams} from "react-router-dom";
 import PostWithComments from "../components/PostWithComments";
 import HandleGetPostByID from "../handlers/posts/HandleGetPostByID";
+import {useCookies} from "react-cookie";
 
 function PostPage(props) {
     const [post, setPost] = useState(null);
@@ -11,9 +12,11 @@ function PostPage(props) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
+    const [cookies, setCookie, removeCookie] = useCookies()
+
     const {post_id} = useParams()
 
-    if (!localStorage.getItem("token"))
+    if (!cookies.token)
         window.location.href = "/login"
 
     useEffect(() => {
@@ -50,7 +53,6 @@ function PostPage(props) {
         return <p className="Indicator">Fetching Error..</p>;
     }
 
-    //test
     function handleCommentDelete(deletedCommentId){
         setComments((prevComments) => prevComments.filter((comment) => comment.comment_id !== deletedCommentId));
     }

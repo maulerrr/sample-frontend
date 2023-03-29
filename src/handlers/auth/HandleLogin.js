@@ -2,8 +2,9 @@ import axios from "axios"
 import {useCookies} from "react-cookie";
 
 async function Login(email, password){
+
     const options = {
-        url: "http://localhost:3001/api/v1/auth/login",
+        url: "http://10.12.96.85:3001/api/v1/auth/login",
         headers: "",
         body: {
             email: email,

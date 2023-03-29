@@ -3,6 +3,7 @@ import classes from "./classes/components.module.css"
 import handleLogin from "../handlers/auth/HandleLogin";
 import {useState} from "react";
 import {Alert, AlertTitle, Button, Fade} from "@mui/material";
+import {useCookies} from "react-cookie";
 
 
 function LoginForm(props) {
@@ -10,6 +11,8 @@ function LoginForm(props) {
     const [password, setPassword] = useState("")
     const [error, setError] = useState(false)
     const [alert, setAlert] = useState(<></>)
+
+    const [cookies, setCookie, removeCookie] = useCookies()
 
     function closeAlert(e){
         e.preventDefault()
@@ -21,6 +24,9 @@ function LoginForm(props) {
         handleLogin(email, password)
             .then((response)=>{
                 console.log("Trying to log in..")
+
+                setCookie("token", response.data.token, {})
+
                 if (response.code === 200) window.location.href = "/"
             })
             .catch((err)=>{
@@ -31,7 +37,7 @@ function LoginForm(props) {
                            onClose={(e)=>{closeAlert(e)}}
                            >
                         <AlertTitle>Error occurred</AlertTitle>
-                        {err.response.data.message}
+                        {err.response?.data.message}
                     </Alert>
                 )
                 setTimeout(()=>{

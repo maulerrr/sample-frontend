@@ -12,8 +12,11 @@ import {Alert, AlertTitle} from "@mui/material";
 function PostCard(props) {
     const [color, setColor] = useState("black")
     const [alert, setAlert] = useState(<></>)
-    const [likesCount, setLikesCount] = useState(0)
-    const [likes, setLikes] = useState(<></>)
+
+    const user_id = JSON.parse(localStorage.getItem("user"))?.id
+
+    // const [likesCount, setLikesCount] = useState(0)
+    // const [likes, setLikes] = useState(<></>)
 
     function closeAlert(e){
         e.preventDefault()
@@ -71,7 +74,6 @@ function PostCard(props) {
                 console.log("error on getting like data")
                 setColor("black")
             })
-
     }, [])
 
     return (
@@ -92,12 +94,14 @@ function PostCard(props) {
                 onClick={HandleLike}>
                 <FontAwesomeIcon icon={faHeart} color={color}/>
             </button>
-            <button
-                className={classes.DeleteButton}
-                onClick={HandleDelete}>
-                <FontAwesomeIcon icon={faTrash}/>
-            </button>
-
+            {
+                props.post.user_id === user_id ?
+                <button
+                    className={classes.DeleteButton}
+                    onClick={HandleDelete}>
+                    <FontAwesomeIcon icon={faTrash}/>
+                </button> : <></>
+            }
             <div className={classes.Alerts}>
                 {alert}
             </div>

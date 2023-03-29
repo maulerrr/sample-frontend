@@ -50,7 +50,10 @@ input{
 }
 
 body {
-
+  min-height: 100vh;
+  background-image: url("https://i2-prod.mirror.co.uk/incoming/article28481656.ece/ALTERNATES/s1200d/0_Monkey-and-its-furry-friend-live-in-Bangladeshjp.jpg");
+  background-size: cover;
+  backdrop-filter: blur(5px);
 }
 
 .Indicator{
@@ -61,4 +64,34 @@ body {
 
 textarea {
   resize: none;
+}
+
+/*
+   ADAPTIVE LAYOUT
+*/
+
+@media only screen and (max-width: 768px) {
+  .Home{
+    margin: 0 1rem;
+  }
+  .Login {
+
+  }
+  .SignUp {
+
+  }
+
+  .CreatePostPage {
+    margin: 0 1rem;
+  }
+
+  .PostPage {
+    padding: 0 1rem;
+  }
+}
+
+@media only screen and (max-width: 1200px) and (min-width: 768px){
+  .PostPage {
+    padding: 0 5rem;
+  }
 }

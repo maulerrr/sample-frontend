@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import classes from "./classes/components.module.css"
 import handleRegistration from "../handlers/auth/HandleRegistration";
 import {Alert, AlertTitle} from "@mui/material";
+import {useCookies} from "react-cookie";
 
 function SignupForm(props) {
     const [username, setUsername] = useState("")
@@ -9,6 +10,8 @@ function SignupForm(props) {
     const [password, setPassword] = useState("")
     const [error, setError] = useState(false)
     const [alert, setAlert] = useState(<></>)
+
+    const [cookies, setCookie, removeCookie] = useCookies()
 
     function HandleRegistration(e){
         e.preventDefault()
@@ -33,6 +36,9 @@ function SignupForm(props) {
         handleRegistration(username, email, password)
             .then((response)=>{
                 console.log("Trying to u sign up..")
+
+                setCookie("token", response.data.token, {})
+
                 if (response.code === 200) window.location.href = "/"
             })
             .catch((err)=>{

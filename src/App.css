@@ -51,8 +51,9 @@ input{
 
 body {
   min-height: 100vh;
-  background-image: url("https://t4.ftcdn.net/jpg/02/82/54/51/360_F_282545153_aI4JQT9Tj01VM3ypwCp1D1y3154IVbSw.jpg");
+  /*background-image: url("https://t4.ftcdn.net/jpg/02/82/54/51/360_F_282545153_aI4JQT9Tj01VM3ypwCp1D1y3154IVbSw.jpg");*/
   /*background-image: url("https://i2-prod.mirror.co.uk/incoming/article28481656.ece/ALTERNATES/s1200d/0_Monkey-and-its-furry-friend-live-in-Bangladeshjp.jpg");*/
+  background-image: url("https://wallpapers.com/images/featured/i5ig3btki8vtrp2g.jpg");
   background-size: cover;
   backdrop-filter: blur(5px);
 }

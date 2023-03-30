@@ -20,12 +20,10 @@ async function Login(email, password){
 
     localStorage.setItem("token", response.data.token)
 
-    console.log(response)
-
     const user = {
         id : response?.data.user_id,
-        username : response?.data.username,
         email : response?.data.email,
+        username : response?.data.username,
     }
 
     localStorage.setItem("user", JSON.stringify(user))

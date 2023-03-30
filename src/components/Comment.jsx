@@ -4,9 +4,14 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrashCan} from "@fortawesome/free-solid-svg-icons"
 import DeleteComment from "../handlers/comments/HandleDeleteComment";
 import {Alert, AlertTitle} from "@mui/material";
+import {useCookies} from "react-cookie";
 
 function Comment(props) {
     const [alert, setAlert] = useState(<></>)
+    const [cookies, setCookie, removeCookie] = useCookies(["token"])
+
+    if (!cookies.token)
+        window.location.href = "/login"
 
     const user_id = JSON.parse(localStorage.getItem("user"))?.id
 

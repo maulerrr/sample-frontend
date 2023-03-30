@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import PostCard from "../components/PostCard";
 import handleGetPosts from "../handlers/posts/HandleGetPosts";
-import DeletePost from "../handlers/posts/HandleDelete";
 import {useCookies} from "react-cookie";
 
 function Homepage() {
@@ -11,13 +10,13 @@ function Homepage() {
 
     const [cookies, setCookie, removeCookie] = useCookies()
 
-    if (!cookies.token)
-        window.location.href = "/login"
-
     // const username = JSON.parse(localStorage.getItem("user")).username
 
     useEffect(() => {
         setError(false);
+
+        if (!cookies.token)
+            window.location.href = "/login"
 
         handleGetPosts()
             .then((response) => response.data)

@@ -10,11 +10,17 @@ import DeleteComment from "../handlers/comments/HandleDeleteComment";
 import CreateComment from "../handlers/comments/HandleComment";
 import GetLike from "../handlers/likes/HandleGetLike";
 import {Alert, AlertTitle} from "@mui/material";
+import {useCookies} from "react-cookie";
 
 function PostWithComments(props) {
     const [text, setText] = useState("")
     const [color, setColor] = useState("black")
     const [alert, setAlert] = useState(<></>)
+
+    const [cookies, setCookie, removeCookie] = useCookies()
+
+    if (!cookies.token)
+        window.location.href = "/login"
 
     function closeAlert(e){
         e.preventDefault()

@@ -1,14 +1,74 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import LogOut from "../handlers/auth/HandleLogOut";
 import classes from "./classes/components.module.css"
-import {faRightFromBracket, faUser} from "@fortawesome/free-solid-svg-icons";
+import {faBars, faRightFromBracket, faUser} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {useCookies} from "react-cookie";
+import {Cookies, useCookies} from "react-cookie";
 
 function Navbar(props) {
     const [clicked, setClicked] = useState(false)
     const [dropdown, setDropdown] = useState(<></>)
-    const [cookies, setCookie, removeCookie] = useCookies()
+    const [cookies, setCookie, removeCookie] = useCookies(["token"])
+
+    const [showBurger, setShowBurger] = useState(false)
+    const [burger, setBurger] = useState(<></>)
+    const [menu, setMenu] = useState(<></>)
+
+    const [windowSize, setWindowSize] = useState([
+        window.innerWidth,
+        window.innerHeight,
+    ]);
+
+    useEffect(()=> {
+        window.onresize = (e) => setWindowSize([window.innerWidth, window.innerHeight])
+
+        if (windowSize[0] < 768) {
+            setShowBurger(true)
+            setBurger(
+                <div className={classes.BurgerContainer}>
+                    <button onClick={handleShowBurger}>
+                        <FontAwesomeIcon icon={faBars} color={"white"}/>
+                    </button>
+                    {menu}
+                </div>
+            )
+        } else {
+            setShowBurger(false)
+            setBurger(<></>)
+            setMenu(<></>)
+        }
+    }, [windowSize, clicked])
+
+    function handleShowBurger(e) {
+        if (clicked) setClicked(false)
+        else setClicked(true)
+
+        if (clicked) {
+            setMenu(
+                <ul>
+                    <li>
+                        <h1>Sample App</h1>
+                    </li>
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    <li>
+                        <a href="/create">Create</a>
+                    </li>
+                    <li>
+                        { username ?
+                            <button onClick={handleLogOut}>
+                                Log Out
+                                &nbsp;
+                                <FontAwesomeIcon icon={faRightFromBracket}/>
+                            </button>
+                            : <></>}
+
+                    </li>
+                </ul>
+            )
+        } else setMenu(<></>)
+    }
 
     function showDropDown(e){
         if (clicked) setClicked(false)
@@ -24,20 +84,17 @@ function Navbar(props) {
                     </button>
                 )
             } else setDropdown(<></>)
-        }
-
-        else window.location.href = "/login"
-
+        } else window.location.href = "/login"
     }
 
     function handleLogOut(e){
         setClicked(false)
-        e.preventDefault()
+        removeCookie("token")
+
         LogOut().then(()=>{
-            removeCookie("token")
             console.log("see ya")
         }).finally(()=>{
-            window.location.href='/'
+            window.location.href='/login'
         })
     }
 
@@ -45,26 +102,29 @@ function Navbar(props) {
 
     return (
         <header>
-            <nav className={classes.Navbar}>
-                <p>
-                    Sample
-                </p>
-
-                <a href="/">Home</a>
-
-                <a href="/create">Create</a>
-
-                <div onClick={showDropDown}>
-                    <p className={classes.NavDropdown} >
-                        <FontAwesomeIcon icon={faUser}/>
-                        &nbsp;
-                        {
-                            username ? username : <a href={"/login"}>Login</a>
-                        }
+            {showBurger ? burger :
+                <nav className={classes.Navbar}>
+                    <p>
+                        Sample
                     </p>
-                    {dropdown}
-                </div>
-            </nav>
+
+                    <a href="/">Home</a>
+
+                    <a href="/create">Create</a>
+
+                    <div onClick={showDropDown}>
+                        <p className={classes.NavDropdown} >
+                            <FontAwesomeIcon icon={faUser}/>
+                            &nbsp;
+                            {
+                                username ? username : <a href={"/login"}>Login</a>
+                            }
+                        </p>
+                        {dropdown}
+                    </div>
+                </nav>
+            }
+
         </header>
     );
 }

@@ -35,6 +35,10 @@ function SignupForm(props) {
         }
         handleRegistration(username, email, password)
             .then((response)=>{
+                if (cookies.token) {
+                    removeCookie("token")
+                }
+
                 console.log("Trying to u sign up..")
 
                 setCookie("token", response.data.token, {})

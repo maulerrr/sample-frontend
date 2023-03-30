@@ -2,7 +2,7 @@ import React from 'react';
 import classes from "./classes/components.module.css"
 import handleLogin from "../handlers/auth/HandleLogin";
 import {useState} from "react";
-import {Alert, AlertTitle, Button, Fade} from "@mui/material";
+import {Alert, AlertTitle} from "@mui/material";
 import {useCookies} from "react-cookie";
 
 
@@ -23,6 +23,10 @@ function LoginForm(props) {
         e.preventDefault()
         handleLogin(email, password)
             .then((response)=>{
+                if (cookies.token) {
+                    removeCookie("token")
+                }
+
                 console.log("Trying to log in..")
 
                 setCookie("token", response.data.token, {})

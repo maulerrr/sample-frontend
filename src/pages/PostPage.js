@@ -16,11 +16,11 @@ function PostPage(props) {
 
     const {post_id} = useParams()
 
-    if (!cookies.token)
-        window.location.href = "/login"
-
     useEffect(() => {
         setError(false);
+
+        if (!cookies.token)
+            window.location.href = "/login"
 
         HandleGetPostByID(post_id)
             .then((response) => response.data)
